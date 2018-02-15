@@ -1,0 +1,47 @@
+    return
+  }
+
+  //button.disabled = false
+  var[ count = new Int32Array(256);
+  for (var n = 0; n < 256; ++n)
+    count[n] = 0
+  for (var n = 0; n < user_entropy.length; ++n)
+    count[user_entropy.charCodeAt(n)]++;
+  var e = 0
+  for (var n = 0; n < 256; ++n) {
+    if (count[n] > 0) {
+      var p = count[n] / user_entropy.length
+      p *= Math.log(p) / Math.log(2)
+      e -= p
+    }
+  }
+  e *= user_entropy.length
+  if (e < 128)
+    good = false
+  if (good)
+    user_entropy_warning_widget.style.display = "none"
+  else
+    user_entropy_warning_widget.style.display = "block"
+}
+
+function enableElement(id, enable)
+{
+  var el = document.getElementById(id)
+  if (el) {
+    if (enable)
+      el.disabled = false;
+    else
+      el.disabled = true;
+  }
+}
+
+function enableLanguage(code, enable)
+{
+  enableElement("lang_" + code, enable)
+}
+
+genwallet();
+</script>
+
+</body>
+</html>
